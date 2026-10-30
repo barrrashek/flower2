@@ -2,7 +2,7 @@
 <html lang="ru">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <title>Цветущий Гибискус</title>
 
   <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/4.0.0/model-viewer.min.js"></script>
@@ -63,28 +63,33 @@
       --poster-color: transparent;
       transition: background 0.5s ease;
     }
+    model-viewer::part(default-ar-button) {
+      bottom: 100px; /* Или другое значение, которое подходит вашему дизайну */
+      right: 20px;
+    }
     .controls-panel {
-      position: absolute;
-      bottom: 30px;
-      left: 50%;
-      transform: translateX(-50%);
+      position: fixed; /* Меняем на fixed, чтобы панель всегда была привязана к экрану */
+      bottom: 0;
+      left: 0;
+      right: 0;
+      width: 100%;
       display: flex;
-      gap: 15px;
-      z-index: 20;
+      justify-content: center;
+      gap: 12px;
+      /* Ключевая строка: отступ = 20px + высота системной панели */
+      padding: 12px 16px calc(12px + env(safe-area-inset-bottom)) 16px; 
+      background: rgba(255, 250, 205, 0.85); /* Легкий фон для читаемости */
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px); /* Для Safari */
+      z-index: 30;
+      box-sizing: border-box;
     }
     .btn {
-      background: var(--btn-bg);
-      color: var(--btn-text);
-      border: 2px solid transparent;
-      padding: 14px 28px;
-      font-size: 1rem;
-      font-weight: 600;
-      border-radius: 40px;
-      cursor: pointer;
-      box-shadow: 0 4px 12px rgba(211, 84, 0, 0.4);
-      transition: all 0.3s ease;
-      font-family: inherit;
-      min-width: 180px;
+      flex: 1; /* Кнопки будут равномерно занимать ширину */
+      max-width: 220px; /* Но не станут слишком широкими */
+      padding: 12px 16px;
+      font-size: 0.95rem;
+      min-width: 0; /* Сбрасываем минимальную ширину, чтобы кнопки могли сжиматься */
     }
     .btn:hover:not(:disabled) {
       background: var(--btn-hover);
